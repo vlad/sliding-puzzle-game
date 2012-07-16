@@ -1,0 +1,81 @@
+@font-face {
+  font-family: Logobloqo;
+  src: local("Logobloqo"), local("Logobloqo"), url(logobloqo2.ttf);
+  font-weight: bold;
+}
+body {
+  background-color: black;
+  background: url('bg.png');
+  color: #ff47aa;
+  font-family: Logobloqo;
+}
+body a {
+  color: white;
+}
+.container {
+  margin: 0 auto;
+  text-align: center;
+}
+canvas {
+  display: inline-block;
+  margin: 10px 10px;
+}
+.settings {
+  display: inline-block;
+  margin: 10px 20px;
+  vertical-align: top;
+  width: 320px;
+}
+.settings .title {
+  color: #f1d8f1;
+  font-size: 36px;
+  line-height: 54px;
+  letter-spacing: 5px;
+  margin-top: 20px;
+}
+.settings .panel {
+  padding: 5px 3px;
+  text-align: center;
+}
+.settings .panel input[type='button'] {
+  background-color: #E00078;
+  border-top: 4px solid #ff47aa;
+  border-left: 4px solid #ff47aa;
+  border-right: 4px solid #7a0041;
+  border-bottom: 4px solid #7a0041;
+  color: #ffe0f1;
+  font-size: 22px;
+  line-height: 33px;
+  margin: 2px 6px;
+  min-width: 88px;
+  padding: 8px;
+}
+.settings .panel input[type='button']:active {
+  color: white;
+}
+.settings .panel select {
+  background-color: #7a0041;
+  border-top: 1px solid #93004f;
+  border-left: 1px solid #93004f;
+  border-right: 1px solid #14000b;
+  border-bottom: 1px solid #14000b;
+  color: #ffe0f1;
+  font-size: 22px;
+  height: 55px;
+  line-height: 33px;
+  margin: 2px 5px;
+  padding-left: 7px;
+  width: 57px;
+}
+.settings .panel .x {
+  color: #ffe0f1;
+  display: inline-block;
+  font-size: 25px;
+}
+footer {
+  font-family: 'Lucida Grande';
+  margin: 0 auto;
+  margin-top: 30px;
+  text-align: center;
+  width: 320px;
+}

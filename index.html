@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Slider Game by Vlad Yazhbin</title>
+    <script src='slider.js' type='text/javascript'></script>
+    <link href='slider.css' rel='stylesheet' type='text/css' />
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport' />
+  </head>
+  <body onload='main()'>
+    <div class='container'>
+      <canvas height='320' id='slider' width='320'>A modern browser is required to view my game!</canvas>
+      <div class='settings'>
+        <div class='title'>Play Slider!</div>
+        <div class='panel'>
+          <input id='slider3x3' type='button' value='3 x 3' />
+          <input id='slider4x4' type='button' value='4 x 4' />
+          <input id='slider5x5' type='button' value='5 x 5' />
+        </div>
+        <div class='title'>make it yours</div>
+        <div class='panel'>
+          <select id='sliderCustomWidth'>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+            <option value='4'>4</option>
+            <option value='5'>5</option>
+            <option value='6'>6</option>
+            <option value='7'>7</option>
+            <option selected='selected' value='8'>8</option>
+            <option value='9'>9</option>
+          </select>
+          <div class='x'>x</div>
+          <select id='sliderCustomHeight'>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+            <option value='4'>4</option>
+            <option value='5'>5</option>
+            <option value='6'>6</option>
+            <option value='7'>7</option>
+            <option selected='selected' value='8'>8</option>
+            <option value='9'>9</option>
+          </select>
+          <input id='sliderCustomNew' type='button' value='New Game' />
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>
+        Slider Puzzle by
+        <a href='http://vlad.github.com'>vlad</a>
+        /
+        <a href='http://twitter.com/vla'>@vla</a>
+      </p>
+      <p>
+        <a href='docs/slider.html'>View Annotated Source (Javascript)</a>
+      </p>
+    </footer>
+  </body>
+</html>
