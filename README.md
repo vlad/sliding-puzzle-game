@@ -1,6 +1,6 @@
 Created July 16th 2012 by Vlad Yazhbin.  Twitter: [@vla](http://twitter.com/vla)
 
-**Slider** is a sample game for GameThrone.js, my new HTML5 & Javascript game engine.
+**Slider** is a simple game for GameThrone.js, my new HTML5 & Javascript game engine.
 
 Description
 ===========
@@ -34,8 +34,8 @@ Algorithm features
 User interface features
 -----------------------
 
-- The game board and the three start buttons fit perfectly on my smartphone in portrait mode
-- The game board and the entire settings panel show side-by-side on larger screens like on my laptop
+- The game board and the three start buttons are designed to fit on a smartphone in portrait mode
+- The game board and the entire settings panel show side-by-side on devices with larger screens
 - The size of the squares and the font for numbering them change in size as as the board size changes
 
 Annotated Source Code
