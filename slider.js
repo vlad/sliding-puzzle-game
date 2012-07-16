@@ -3,6 +3,8 @@
 Slider is a sample game for GameThrone.js, my new HTML5 & Javascript game engine.
 Visit [vlad.github.com/gamethrone](http://vlad.github.com/gamethrone) to play Slider or get more examples.
 
+See the README in the GitHub repository for reasons why I made certain coding, algorithm, and UI decisions.
+ [github.com/vlad/sliding-puzzle-game](http://github.com/vlad/sliding-puzzle-game)
 # Description
 
 **Slider** is a sliding puzzle game where n tiles are laid out on a board x tiles wide and y tiles tall, where n is x * y - 1.

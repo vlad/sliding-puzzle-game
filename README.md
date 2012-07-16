@@ -17,7 +17,7 @@ Code features
 -------------
 
 - I use a functional approach to make the code easy to read.
-- I created a forEachNeighbor(...) function that I reused heavily.
+- I created a getNeighbors(...) and *forEachNeighbor(...)* function that I reused heavily.
 - I created a system where new objects are extended with additional methods (properties) at run-time by passing them into the new ObjectName(...) call.
 - Click event handling in the DOM and canvas drawing is delegated only to the GameHTML5View, so that Game, Board, and Input objects can be used with another platform later.
 - I created a system where many event handlers can be initialized at once for specific element ids in the DOM via an object that looks like { click:  { 'dom_id' : function(...), ... } ... } for ease of use
