@@ -32,7 +32,7 @@ function main() {
           , shuffles = 10 * this.height * this.width
         ;
         if (blankIndex != -1) {
-          blank.top = Math.floor(blankIndex / this.height);
+          blank.top = Math.floor(blankIndex / this.width);
           blank.left = blankIndex - blank.top * this.width;
 
           // We must get a list of neighboring tiles at the blank tile's current location,
@@ -134,19 +134,20 @@ function main() {
       // view.renderSquare(...) performs the actual drawing of a square.
       renderSquare: function(left, top) {
         var board    = this.game.board
+          , ctx      = this.ctx
           , ss       = this.squareSize
           , fontSize = Math.floor(ss / 2.5)
           , value    = board.get(left, top)
         ;
         if (value === 0) {
-          this.ctx.clearRect(left * (ss + 1), top * (ss + 1), ss, ss);
+          ctx.clearRect(left * (ss + 1), top * (ss + 1), ss, ss);
         }
         else {
-          this.ctx.fillStyle = "#E00078";
-          this.ctx.fillRect(left * (ss + 1), top * (ss + 1), ss, ss);
-          this.ctx.fillStyle = "#FFD6F5";
-          this.ctx.font = fontSize + 'px Arial';
-          this.ctx.fillText(value, left * (ss + 1) + (ss - fontSize) / 2 + (value < 10 ? fontSize / 5 : 0),
+          ctx.fillStyle = "#E00078";
+          ctx.fillRect(left * (ss + 1), top * (ss + 1), ss, ss);
+          ctx.fillStyle = "#FFD6F5";
+          ctx.font = fontSize + 'px Arial';
+          ctx.fillText(value, left * (ss + 1) + (ss - fontSize) / 2 + (value < 10 ? fontSize / 5 : 0),
                                    top  * (ss + 1) + (ss + fontSize) / 2 - 3);
         }
       }
@@ -170,9 +171,28 @@ function main() {
   slider.init('slider', {
     click: {
       // When the user clicks the canvas element (id: 'canvas'),
-      slider: function () {
-        var left = Math.floor(event.offsetX / (slider.view.squareSize + 1));
-        var top = Math.floor(event.offsetY / (slider.view.squareSize + 1));
+      slider: function (event) {
+        var x, y;
+        var getPosition = (function () {
+          if (event.offsetX || event.offsetY) {
+            x = event.offsetX;
+            y = event.offsetY;
+          } else {
+            if (event.x || event.y) {
+              x = event.x;
+              y = event.y;
+            } else {
+              x = event.clientX + document.body.scrollLeft +
+                    document.documentElement.scrollLeft;
+              y = event.clientY + document.body.scrollTop +
+                    document.documentElement.scrollTop;
+            }
+            x -= slider.view.canvas.offsetLeft;
+            y -= slider.view.canvas.offsetTop;
+          }
+        });
+        var left = Math.floor(x / (slider.view.squareSize + 1));
+        var top = Math.floor(y / (slider.view.squareSize + 1));
         //we automatically trigger input.onSquareClick(...)
         if (slider.board.inbounds(left, top)) {
           slider.input.onSquareClick(left, top);
@@ -184,8 +204,8 @@ function main() {
       slider5x5: function() { slider.newRandomGame(5, 5) },
       // Clicking the custom game button creates a new game of user-specified size.
       sliderCustomNew: function() {
-        var height = document.getElementById('sliderCustomHeight').value
-          ,  width = document.getElementById('sliderCustomWidth').value
+        var height = parseInt(document.getElementById('sliderCustomHeight').value)
+          ,  width = parseInt(document.getElementById('sliderCustomWidth').value)
         ;
         slider.newRandomGame(width, height);
       }
@@ -204,7 +224,7 @@ Slider puzzle and Minesweeper, both of which render the game on an HTML5 canvas 
 
 // The **Factory** returns a new object of a given prototype with additional methods on it.
 var Factory = function(prototypeObject, methods) {
-  for (name in methods) {
+  for (var name in methods) {
     methods[name] = {value: methods[name]};
   }
   return Object.create(prototypeObject, methods);
