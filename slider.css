@@ -65,7 +65,8 @@ canvas {
   line-height: 33px;
   margin: 2px 5px;
   padding-left: 7px;
-  width: 57px;
+  vertical-align: top;
+  width: 56px;
 }
 .settings .panel .x {
   color: #ffe0f1;

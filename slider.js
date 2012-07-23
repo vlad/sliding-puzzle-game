@@ -173,26 +173,9 @@ function main() {
       // When the user clicks the canvas element (id: 'canvas'),
       slider: function (event) {
         var x, y;
-        var getPosition = (function () {
-          if (event.offsetX || event.offsetY) {
-            x = event.offsetX;
-            y = event.offsetY;
-          } else {
-            if (event.x || event.y) {
-              x = event.x;
-              y = event.y;
-            } else {
-              x = event.clientX + document.body.scrollLeft +
-                    document.documentElement.scrollLeft;
-              y = event.clientY + document.body.scrollTop +
-                    document.documentElement.scrollTop;
-            }
-            x -= slider.view.canvas.offsetLeft;
-            y -= slider.view.canvas.offsetTop;
-          }
-        });
-        var left = Math.floor(x / (slider.view.squareSize + 1));
-        var top = Math.floor(y / (slider.view.squareSize + 1));
+        var coordinates = slider.view.getCoordinates(event);
+        var left = Math.floor(coordinates.left / (slider.view.squareSize + 1));
+        var top = Math.floor(coordinates.top / (slider.view.squareSize + 1));
         //we automatically trigger input.onSquareClick(...)
         if (slider.board.inbounds(left, top)) {
           slider.input.onSquareClick(left, top);
@@ -325,6 +308,30 @@ GameHTML5View.prototype = {
         this.onHTML5Event(domId, type, events[type][domId]);
       }
     }
+  },
+  //getCoordinates(...) returns the x, y coordinates of an event in the canvas
+  getCoordinates: function (event) {
+    var x, y;
+    // we use event.offsetX and event.offsetY in Google Chrome,
+    if (event.offsetX || event.offsetY) {
+      x = event.offsetX;
+      y = event.offsetY;
+    } else {
+      // event.x and event.y in many browsers,
+      if (event.x || event.y) {
+        x = event.x;
+        y = event.y;
+      // and client.x and client.y in Firefox.
+      } else {
+        x = event.clientX + document.body.scrollLeft +
+          document.documentElement.scrollLeft;
+        y = event.clientY + document.body.scrollTop +
+          document.documentElement.scrollTop;
+      }
+      x -= this.canvas.offsetLeft;
+      y -= this.canvas.offsetTop;
+    }
+    return {left: x, top: y};
   },
   // onHTML5Event(...) sets up each individual listener in the DOM.
   onHTML5Event: function(id, type, func) {

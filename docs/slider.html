@@ -416,26 +416,9 @@ element, and the functions we want to use to handle interactions on our web page
     <div class='code'>
       <div class="highlight"><pre>      <span class="nx">slider</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">;</span>
-        <span class="kd">var</span> <span class="nx">getPosition</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-          <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">offsetX</span> <span class="o">||</span> <span class="nx">event</span><span class="p">.</span><span class="nx">offsetY</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">x</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">offsetX</span><span class="p">;</span>
-            <span class="nx">y</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">offsetY</span><span class="p">;</span>
-          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">x</span> <span class="o">||</span> <span class="nx">event</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
-              <span class="nx">x</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-              <span class="nx">y</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-              <span class="nx">x</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollLeft</span> <span class="o">+</span>
-                    <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollLeft</span><span class="p">;</span>
-              <span class="nx">y</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">+</span>
-                    <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="nx">x</span> <span class="o">-=</span> <span class="nx">slider</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">offsetLeft</span><span class="p">;</span>
-            <span class="nx">y</span> <span class="o">-=</span> <span class="nx">slider</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">offsetTop</span><span class="p">;</span>
-          <span class="p">}</span>
-        <span class="p">});</span>
-        <span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">x</span> <span class="o">/</span> <span class="p">(</span><span class="nx">slider</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">squareSize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
-        <span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">y</span> <span class="o">/</span> <span class="p">(</span><span class="nx">slider</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">squareSize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span></pre></div>
+        <span class="kd">var</span> <span class="nx">coordinates</span> <span class="o">=</span> <span class="nx">slider</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">getCoordinates</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">coordinates</span><span class="p">.</span><span class="nx">left</span> <span class="o">/</span> <span class="p">(</span><span class="nx">slider</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">squareSize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+        <span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">coordinates</span><span class="p">.</span><span class="nx">top</span> <span class="o">/</span> <span class="p">(</span><span class="nx">slider</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">squareSize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -739,6 +722,70 @@ such as { click: {'slider': function(...) ...}, ... }</p>
     <div class='docs'>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-41'>#</a>
+      </div>
+      <p>getCoordinates(...) returns the x, y coordinates of an event in the canvas</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>  <span class="nx">getCoordinates</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-42'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-42'>#</a>
+      </div>
+      <p>we use event.offsetX and event.offsetY in Google Chrome,</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">offsetX</span> <span class="o">||</span> <span class="nx">event</span><span class="p">.</span><span class="nx">offsetY</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">x</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">offsetX</span><span class="p">;</span>
+      <span class="nx">y</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">offsetY</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-43'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-43'>#</a>
+      </div>
+      <p>event.x and event.y in many browsers,</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">x</span> <span class="o">||</span> <span class="nx">event</span><span class="p">.</span><span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">x</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+        <span class="nx">y</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-44'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-44'>#</a>
+      </div>
+      <p>and client.x and client.y in Firefox.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">x</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollLeft</span> <span class="o">+</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollLeft</span><span class="p">;</span>
+        <span class="nx">y</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">+</span>
+          <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nx">x</span> <span class="o">-=</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">offsetLeft</span><span class="p">;</span>
+      <span class="nx">y</span> <span class="o">-=</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">offsetTop</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="nx">y</span><span class="p">};</span>
+  <span class="p">},</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-45'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-45'>#</a>
       </div>
       <p>onHTML5Event(...) sets up each individual listener in the DOM.</p>
     </div>
